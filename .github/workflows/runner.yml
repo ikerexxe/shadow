@@ -24,17 +24,7 @@ jobs:
         cat /proc/self/uid_map
         cat /proc/self/status
         systemd-detect-virt
-    - name: Install dependencies
-      run: |
-        sudo cat /etc/apt/sources.list
-        sudo sed -i '/deb-src/d' /etc/apt/sources.list
-        sudo sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
-        export DEBIAN_PRIORITY=critical
-        export DEBIAN_FRONTEND=noninteractive
-        sudo apt-get update
-        sudo apt-get -y dist-upgrade
-        sudo apt-get -y install ubuntu-dev-tools automake autopoint xsltproc gettext expect byacc libtool libbsd-dev pkgconf
-        sudo apt-get -y build-dep shadow
+    - uses: ./.github/actions/install-dependencies
     - name: configure
       run: |
         autoreconf -v -f --install
