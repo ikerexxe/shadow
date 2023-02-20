@@ -38,3 +38,29 @@ jobs:
         cd tests
         sudo ./run_some
         cat testsuite.log
+
+  container-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [alpine, fedora]
+    container:
+      image: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/install-dependencies
+    - name: configure alpine
+      if: ${{ matrix.os == 'alpine' }}
+      run: |
+        autoreconf -v -f --install
+        ./autogen.sh --without-selinux --disable-man --disable-nls --with-yescrypt
+    - name: configure fedora
+      if: ${{ matrix.os == 'fedora' }}
+      run: |
+        autoreconf -v -f --install
+        ./autogen.sh --enable-shadowgrp --enable-man --with-audit \
+          --with-sha-crypt --with-bcrypt --with-yescrypt --with-selinux \
+          --without-libcrack --without-libpam --enable-shared \
+          --with-group-name-max-length=32
+    - run: make
