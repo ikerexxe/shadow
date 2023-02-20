@@ -3,10 +3,28 @@ description: 'Install dependencies to build shadow-utils'
 runs:
   using: "composite"
   steps:
-  - shell: bash
+  - if: ${{ matrix.os == 'alpine' }}
+    shell: sh
     run: |
-      sudo apt-get update -y
-      sudo apt-get install -y ubuntu-dev-tools libbsd-dev
-      sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-      sudo apt-get update -y
+      apk add autoconf automake build-base byacc expect gettext-dev git \
+        libbsd-dev libtool libxslt pkgconf
+
+  - if: ${{ matrix.os == 'fedora' }}
+    shell: bash
+    run: |
+      dnf install -y audit-libs-devel autoconf automake byacc expect \
+        gettext-devel libbsd-devel libsemanage-devel libselinux-devel libtool \
+        libxslt
+
+  - if: ${{ github.job != 'container-build' }}
+    shell: bash
+    run: |
+      sudo cat /etc/apt/sources.list
+      sudo sed -i '/deb-src/d' /etc/apt/sources.list
+      sudo sed -i '/^deb /p;s/ /-src /' /etc/apt/sources.list
+      export DEBIAN_PRIORITY=critical
+      export DEBIAN_FRONTEND=noninteractive
+      sudo apt-get update
+      sudo apt-get -y dist-upgrade
+      sudo apt-get -y install automake autopoint byacc expect gettext libbsd-dev libtool pkgconf ubuntu-dev-tools xsltproc
       sudo apt-get -y build-dep shadow
