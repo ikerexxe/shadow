@@ -13,6 +13,9 @@
 
 #include <limits.h>
 
+#ifndef ULONG_WIDTH
+#define ULONG_WIDTH (sizeof(unsigned long) * CHAR_BIT)
+#endif
 
 inline unsigned long bit_ceilul(unsigned long x);
 inline unsigned long bit_ceil_wrapul(unsigned long x);
