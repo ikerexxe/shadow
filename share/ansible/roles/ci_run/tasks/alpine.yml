@@ -71,3 +71,22 @@
     src: /usr/local/src/shadow/etc/login.defs
     dest: /etc/login.defs
     remote_src: yes
+
+#The following is a workaround
+- name: Ensure test dependencies are installed
+  community.general.apk:
+    name:
+      - bash
+    state: present
+
+#The following is a workaround
+- name: Change shell for tests
+  ansible.builtin.command:
+    chsh -s /bin/bash
+
+#The following is a workaround
+- name: Create a symbolic link
+  ansible.builtin.file:
+    src: /bin/bash
+    dest: /usr/bin/bash
+    state: link
