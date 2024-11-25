@@ -6,7 +6,7 @@ domains:
   - hostname: shadow.test
     role: shadow
     conn:
-      type: docker
+      type: podman
       container: builder
     artifacts:
     - /var/log/*
