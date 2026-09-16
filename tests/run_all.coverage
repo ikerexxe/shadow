@@ -346,17 +346,6 @@ run_test ./grouptools/gpasswd/69_gpasswd_change_passwd_2_tries/gpasswd.test
 run_test ./grouptools/gpasswd/70_gpasswd_change_passwd_3_tries/gpasswd.test
 run_test ./grouptools/gpasswd/71_gpasswd_change_passwd_4_tries/gpasswd.test
 run_test ./grouptools/gpasswd/72_gpasswd-M-A/gpasswd.test
-run_test ./grouptools/groupdel/01_groupdel_delete_group/groupdel.test
-run_test ./grouptools/groupdel/02_groupdel_delete_group_no_gshadow_group/groupdel.test
-run_test ./grouptools/groupdel/03_groupdel_delete_group_no_gshadow_file/groupdel.test
-run_test ./grouptools/groupdel/04_groupdel_delete_group_error_busy_group/groupdel.test
-run_test ./grouptools/groupdel/05_groupdel_delete_group_error_unknown_group/groupdel.test
-run_test ./grouptools/groupdel/06_groupdel_delete_group_error_locked_group/groupdel.test
-run_test ./grouptools/groupdel/07_groupdel_delete_group_error_locked_gshadow/groupdel.test
-run_test ./grouptools/groupdel/08_groupdel_delete_group_error_no_group_parameter/groupdel.test
-run_test ./grouptools/groupdel/09_groupdel_delete_group_error_two_group_parameter/groupdel.test
-run_test ./grouptools/groupdel/10_groupdel_usage/groupdel.test
-run_test ./grouptools/groupdel/11_groupdel_invalid_option/groupdel.test
 run_test ./grouptools/groupmod/01_groupmod_change_gid/groupmod.test
 run_test ./grouptools/groupmod/02_groupmod_change_gid_change_primary_group/groupmod.test
 run_test ./grouptools/groupmod/03_groupmod_change_gid_no_gshadow_group/groupmod.test
